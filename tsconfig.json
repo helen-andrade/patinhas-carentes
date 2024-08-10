@@ -21,6 +21,9 @@
       "@errors/*": [
         "errors/*"
       ],
+      "@routes/*": [
+        "routes/*"
+      ],
     },
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,

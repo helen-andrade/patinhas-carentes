@@ -2,7 +2,7 @@ import 'dotenv/config'
 import "reflect-metadata";
 import express, { Request, Response } from 'express';
 import { AppDataSource } from '@data/data-source';
-import getOngsController from '@controllers/ongs/getOngsController'
+import ongs from '@routes/ongsRoutes';
 
 const app = express();
 app.use(express.json());
@@ -16,8 +16,6 @@ AppDataSource.initialize()
   })
   .catch((error) => console.error("Error during Data Source initialization:", error));
 
-app.get('/api/v1/ongs/:id?', async (req: Request, res: Response) => {
-  return await getOngsController(req, res);
-});
+app.use('/api/v1', ongs);
 
 export { app };
