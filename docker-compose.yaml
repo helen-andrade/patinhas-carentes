@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  patinhas_db:
+    image: mysql:8.0
+    container_name: patinhas_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: patinhas_carentes_dev
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - patinhas-network
+
+volumes:
+  mysql-data:
+
+networks:
+  patinhas-network:
+    driver: bridge
