@@ -18,6 +18,9 @@
       "@protocols/*": [
         "protocols/*"
       ],
+      "@errors/*": [
+        "errors/*"
+      ],
     },
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,

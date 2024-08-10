@@ -1,22 +1,17 @@
 import { AppDataSource } from "@data/data-source";
 import { Ongs } from "@data/entities/Ongs";
 import { Like, FindOperator } from "typeorm";
-
-const repository = AppDataSource.getRepository(Ongs);
-
+import { Pagination } from "@data/repositories/types";
 export interface Filter {
   id?: number;
   name?: string | FindOperator<string>;
   is_active?: boolean;
 }
 
-interface Pagination {
-  limit?: number;
-  offset?: number;
-}
+const repository = AppDataSource.getRepository(Ongs);
 
-export async function find(filter: Filter, pagination: Pagination) {
-  if(filter.name) {
+async function find(filter: Filter, pagination: Pagination) {
+  if (filter.name) {
     filter.name = Like(`%${filter.name}%`);
   }
 
@@ -27,4 +22,8 @@ export async function find(filter: Filter, pagination: Pagination) {
     take: pagination.limit,
     skip: pagination.offset,
   });
+}
+
+export const ongsRepository = {
+  find,
 }
