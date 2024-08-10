@@ -5,6 +5,7 @@ import { Pagination } from "@data/repositories/types";
 export interface Filter {
   id?: number;
   name?: string | FindOperator<string>;
+  city?: string | FindOperator<string>;
   is_active?: boolean;
 }
 
@@ -13,6 +14,7 @@ const repository = mySQL.getRepository(Ongs);
 async function find(filter: Filter, pagination: Pagination) {
   if (filter.name) {
     filter.name = Like(`%${filter.name}%`);
+    filter.name = Like(`%${filter.city}%`);
   }
 
   filter.is_active = true;

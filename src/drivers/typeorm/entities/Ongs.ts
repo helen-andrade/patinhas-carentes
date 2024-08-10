@@ -38,6 +38,20 @@ export class Ongs {
   })
   is_active: boolean
 
+  @Column({
+    type: "varchar",
+    length: 120,
+    nullable: false
+  })
+  city: string
+
+  @Column({
+    type: "varchar",
+    length: 2,
+    nullable: false
+  })
+  state: string
+
   @CreateDateColumn({ type: "timestamp" })
   created_at: Date;
 

@@ -36,6 +36,7 @@ function makeFilters(req: Request): Filter {
 
   if (req.params.id) filter.id = Number(req.params.id);
   if (req.query.name) filter.name = String(req.query.name);
+  if (req.query.city) filter.city = String(req.query.city);
 
   return filter;
 }
