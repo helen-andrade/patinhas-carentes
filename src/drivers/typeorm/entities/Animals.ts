@@ -4,12 +4,13 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
-  OneToMany
+  ManyToOne,
+  JoinColumn
 } from "typeorm";
-import { Animals } from '@drivers/typeorm/entities/Animals';
+import { Ongs } from '@drivers/typeorm/entities/Ongs';
 
 @Entity()
-export class Ongs {
+export class Animals {
   @PrimaryGeneratedColumn()
   id: number
 
@@ -31,28 +32,21 @@ export class Ongs {
     type: "text",
     nullable: false
   })
-  logo_url: string
+  image_url: string
 
   @Column({
     type: "boolean",
     default: false,
     nullable: false,
   })
-  is_active: boolean
+  is_available: boolean
 
   @Column({
     type: "varchar",
-    length: 120,
+    length: 20,
     nullable: false
   })
-  city: string
-
-  @Column({
-    type: "varchar",
-    length: 2,
-    nullable: false
-  })
-  state: string
+  specie: string
 
   @CreateDateColumn({ type: "timestamp" })
   created_at: Date;
@@ -60,6 +54,7 @@ export class Ongs {
   @UpdateDateColumn({ type: "timestamp", nullable: true })
   updated_at?: Date;
 
-  @OneToMany(() => Animals, animal => animal.ong)
-  animals: Animals[];
+  @ManyToOne(() => Ongs, ong => ong.animals)
+  @JoinColumn({ name: 'ong_id' })
+  ong: Ongs;
 }
