@@ -1,5 +1,5 @@
-import { AppDataSource } from "@data/data-source";
-import { Ongs } from "@data/entities/Ongs";
+import { mySQL } from "@drivers/typeorm/mySQL";
+import { Ongs } from "@drivers/typeorm/entities/Ongs";
 import { Like, FindOperator } from "typeorm";
 import { Pagination } from "@data/repositories/types";
 export interface Filter {
@@ -8,7 +8,7 @@ export interface Filter {
   is_active?: boolean;
 }
 
-const repository = AppDataSource.getRepository(Ongs);
+const repository = mySQL.getRepository(Ongs);
 
 async function find(filter: Filter, pagination: Pagination) {
   if (filter.name) {

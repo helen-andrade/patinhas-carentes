@@ -24,6 +24,9 @@
       "@routes/*": [
         "routes/*"
       ],
+      "@drivers/*": [
+        "drivers/*"
+      ],
     },
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
