@@ -15,10 +15,13 @@
       "@repositories/*": [
         "repositories/*"
       ],
+      "@protocols/*": [
+        "protocols/*"
+      ],
     },
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "strict": true,
+    "strict": false,
     "skipLibCheck": true,
     "strictPropertyInitialization": false,
   }

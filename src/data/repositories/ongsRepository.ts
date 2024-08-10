@@ -4,7 +4,7 @@ import { Like, FindOperator } from "typeorm";
 
 const repository = AppDataSource.getRepository(Ongs);
 
-interface Filter {
+export interface Filter {
   id?: number;
   name?: string | FindOperator<string>;
   is_active?: boolean;

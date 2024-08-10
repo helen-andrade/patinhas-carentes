@@ -1,31 +1,10 @@
 import { Request, Response } from "express";
-import * as ongsRepository from "@repositories/ongsRepository";
+import * as ongsRepository from "@data/repositories/ongsRepository";
+import { Pagination } from "@data/repositories/types";
+import { httpInternalServerError, httpSuccess, HttpResponse, httpBadRequest } from "@protocols/http";
 
-interface Filter {
-  id?: number;
-  name?: string;
-}
-
-interface Pagination {
-  limit?: number;
-  offset?: number;
-}
-
-interface HttpResponse {
-  status: 'success' | 'failure' | 'error';
-  data: any[];
-  meta?: {
-    total: number;
-    limit: number;
-    offset: number;
-  };
-  error?: {
-    message: string;
-  }
-}
-
-function makeFilters(req: Request): Filter {
-  let filter: Filter = {}
+function makeFilters(req: Request): ongsRepository.Filter {
+  let filter: ongsRepository.Filter = {}
 
   if (req.params.id) filter.id = Number(req.params.id);
   if (req.query.name) filter.name = String(req.query.name);
@@ -34,37 +13,38 @@ function makeFilters(req: Request): Filter {
 }
 
 function makePagination(req: Request): Pagination {
-  let pagination: Pagination = {};
-
-  pagination.limit = Number(req.query.limit) || 10;
-  pagination.offset = Number(req.query.offset) || 0;
-
-  return pagination;
+  return {
+    limit: Number(req.query.limit) || 10,
+    offset: Number(req.query.offset) || 0,
+  };
 }
-
 
 export default async function getOngsController(req: Request, res: Response): Promise<Response<HttpResponse>> {
   try {
     const filter = makeFilters(req);
     const pagination = makePagination(req);
 
-    const ongs = await ongsRepository.find(filter, pagination);
+    if (filter.id && filter.id <= 0) return httpBadRequest(res, 'ONG id must be greater than zero');
+    if (pagination.limit && pagination.limit < 0) {
+      return httpBadRequest(res, 'Pagination limit must be greater or equal than zero');
+    }
+    if (pagination.offset && pagination.offset < 0) {
+      return httpBadRequest(res, 'Pagination offset must be greater or equal than zero');
+    }
 
-    return res.status(200).json({
-      status: 'success',
-      meta: {
-        total: ongs.length,
+    const data = await ongsRepository.find(filter, pagination);
+
+    return httpSuccess(
+      res,
+      data,
+      {
+        total: data.length,
         limit: pagination.limit,
         offset: pagination.offset
-      },
-      data: ongs,
-    });
+      }
+    );
   } catch (error) {
     console.error(error);
-
-    return res.status(500).json({
-      status: 'error',
-      error: 'Internal Server Error',
-    });
+    return httpInternalServerError(res);
   }
 }
