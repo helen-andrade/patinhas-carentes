@@ -1,6 +1,19 @@
 version: '3.8'
 
 services:
+  patinhas_api:
+      build:
+        context: ./api
+      volumes:
+        - ./api/src:/app/src
+        - /app/node_modules
+      ports:
+        - "4000:4000"
+      networks:
+        - patinhas-network
+      depends_on:
+      - patinhas_db
+
   patinhas_db:
     image: mysql:8.0
     container_name: patinhas_db
