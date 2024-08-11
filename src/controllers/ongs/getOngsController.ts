@@ -14,6 +14,8 @@ export default async function getOngsController(req: Request, res: Response): Pr
     if (pagination.limit && pagination.limit < 0) return invalidPaginationLimitError(res);
     if (pagination.offset && pagination.offset < 0) return invalidPaginationOffsetError(res);
 
+    filter.is_active = true;
+
     const data = await ongsRepository.find(filter, pagination);
 
     return httpSuccess(

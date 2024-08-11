@@ -32,6 +32,14 @@ export function httpSuccess(res: Response, data: any[], meta: Meta): Response<Ht
   });
 }
 
+export function httpCreated(res: Response, data: any[], meta: Meta): Response<HttpSuccess> {
+  return res.status(201).json({
+    status: 'success',
+    data,
+    meta,
+  });
+}
+
 export function httpInternalServerError(res: Response): Response<HttpInternalServerError> {
   return res.status(500).json({
     status: 'error',

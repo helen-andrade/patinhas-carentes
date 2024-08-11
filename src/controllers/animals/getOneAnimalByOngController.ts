@@ -4,7 +4,7 @@ import { animalsRepository } from "@data/repositories/animalsRepository";
 import { ongIdRequiredError, invalidOngIdError } from "@errors/ongs";
 import { animalIdRequiredError, invalidAnimalIdError } from "@errors/animals";
 
-export default async function getAnimalController(req: Request, res: Response): Promise<Response<HttpResponse>> {
+export default async function getOneAnimalByOngController(req: Request, res: Response): Promise<Response<HttpResponse>> {
   try {
     const ongId = Number(req.params.ongId);
     if (!ongId) return ongIdRequiredError(res);

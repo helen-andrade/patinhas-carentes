@@ -5,7 +5,7 @@ import { Pagination } from "@data/repositories/types";
 import { invalidPaginationLimitError, invalidPaginationOffsetError } from "@errors/data";
 import { ongIdRequiredError, invalidOngIdError } from "@errors/ongs";
 
-export default async function getAllAnimalsController(req: Request, res: Response): Promise<Response<HttpResponse>> {
+export default async function getAllAnimalsByOngController(req: Request, res: Response): Promise<Response<HttpResponse>> {
   try {
     const ongId = Number(req.params.ongId);
     if(!ongId) return ongIdRequiredError(res);

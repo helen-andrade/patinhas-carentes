@@ -22,10 +22,31 @@ export class Ongs {
 
   @Column({
     type: "varchar",
+    length: 14,
+    nullable: false
+  })
+  cnpj: string
+
+  @Column({
+    type: "varchar",
     length: 120,
     nullable: false
   })
   description: string
+
+  @Column({
+    type: "varchar",
+    length: 120,
+    nullable: false
+  })
+  email: string
+
+  @Column({
+    type: "varchar",
+    length: 15,
+    nullable: false
+  })
+  whatsapp: string
 
   @Column({
     type: "text",
