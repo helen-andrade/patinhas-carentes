@@ -27,10 +27,13 @@ export interface NewOng {
 
 const repository = mySQL.getRepository(Ongs);
 
-async function find(filter: Filter, pagination: Pagination) {
+async function findAll(filter: Filter, pagination: Pagination) {
   if (filter.name) {
     filter.name = Like(`%${filter.name}%`);
-    filter.name = Like(`%${filter.city}%`);
+  }
+
+  if(filter.city) {
+    filter.city = Like(`%${filter.city}%`);
   }
 
   return await repository.find({
@@ -49,7 +52,7 @@ async function create(ong: NewOng): Promise<Ongs> {
 }
 
 export const ongsRepository = {
-  find,
+  findAll,
   findOne,
   create
 }
