@@ -23,8 +23,13 @@ async function findAll(filter: Filter, pagination: Pagination): Promise<Animals[
   });
 }
 
-async function findOne(id: number): Promise<Animals> {
-  return await repository.findOne({ where: { id } });
+async function findOne(animalId: number, ongId: number): Promise<Animals> {
+  const where: { [key: string]: any } = {
+    id: animalId,
+    ong: { id: ongId }
+  };
+
+  return await repository.findOne({ where });
 }
 
 export const animalsRepository = {

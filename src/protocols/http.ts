@@ -4,8 +4,8 @@ export type HttpResponse = HttpSuccess | HttpInternalServerError | HttpBadReques
 
 interface Meta {
   total: number;
-  limit: number;
-  offset: number;
+  limit?: number;
+  offset?: number;
 }
 
 interface HttpSuccess {
