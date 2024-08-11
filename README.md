@@ -1,6 +1,5 @@
-# TODO
-- [x] Adicionar typeorm
-- [x] Adicionar docker-compose
+# TODO API
 - [ ] Adicionar vitest
-- [ ] Config tsconfig
-- [ ] Adicionar Docker file
+
+# TODO APP
+- [ ] Rotas

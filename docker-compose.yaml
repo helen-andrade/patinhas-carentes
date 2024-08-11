@@ -1,6 +1,20 @@
 version: '3.8'
 
 services:
+  patinhas_app:
+    build:
+      context: ./app
+    volumes:
+      - ./app:/app
+      - /app/node_modules
+    ports:
+      - "5173:5173"
+    networks:
+      - patinhas-network
+    depends_on:
+      - patinhas_api
+      - patinhas_db
+
   patinhas_api:
       build:
         context: ./api
