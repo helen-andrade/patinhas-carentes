@@ -13,8 +13,12 @@ export default async function getAllAnimalsController(req: Request, res: Respons
 
     const filter = {
       ong_id: ongId,
-      is_available: true
+      is_available: true,
+      specie: String(req.query.specie)
     };
+
+    if(!req.query.specie) delete filter.specie;
+
     const pagination = makePagination(req);
 
     if (pagination.limit && pagination.limit < 0) return invalidPaginationLimitError(res);
