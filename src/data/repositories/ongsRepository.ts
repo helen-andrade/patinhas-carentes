@@ -2,6 +2,7 @@ import { mySQL } from "@drivers/typeorm/mySQL";
 import { Ongs } from "@drivers/typeorm/entities/Ongs";
 import { Like, FindOperator } from "typeorm";
 import { Pagination } from "@data/repositories/types";
+
 export interface Filter {
   id?: number;
   name?: string | FindOperator<string>;
