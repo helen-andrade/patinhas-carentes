@@ -13,6 +13,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+$primary: #7749F8;
+$secondary: #262626;
+$info: #737373;
+
+@import 'bootstrap/scss/bootstrap';
+
 a {
   font-weight: 500;
   color: #646cff;
